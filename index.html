@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Marías Agrotecnología</title>
+<!-- META PARA VISTA PREVIA -->
+<meta property="og:title" content="3 Marías Farm">
+<meta property="og:description" content="Desarrollo e innovación en biotecnología">
+<meta property="og:image" content="https://3marias.bio/img/logo.png">
+<meta property="og:url" content="https://3marias.bio">
+<meta property="og:type" content="website">
+
+<!-- PARA WHATSAPP / GENERAL -->
+<meta name="description" content="Desarrollo e innovación en biotecnología">
+
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:linear-gradient(to bottom right,#a8e063,#56ab2f);
+    color:#222;
+    padding-top:120px;
+}
+
+/* NAV */
+nav{
+    height:120px;
+    background:#1768ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:4000;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+    transition:.3s;
+}
+
+
+nav.nav-small{height:70px;}
+
+.logo-box{
+    position:absolute;
+    left:20px;
+    background:white;
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+.logo-box{
+    position:absolute;
+    left:20px;
+    transition: transform 0.15s ease-out;
+    will-change: transform;
+}
+
+
+.logo-box img{
+    width:75%;
+    height:75%;
+    object-fit:contain;
+    transition:.3s;
+}
+
+/* cuando baja el menú */
+nav.nav-small .logo-box{
+    width:65px;
+    height:65px;
+}
+
+nav.nav-small .logo-box img{
+    width:80%;
+    height:80%;
+}
+
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:45px;
+    margin:0;
+    padding:0;
+}
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:700;
+}
+nav.nav-small a{font-size:18px;}
+
+.menu-toggle{
+    display:none;
+    position:absolute;
+    right:20px;
+    font-size:40px;
+    color:white;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero{
+    height:85vh;
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+    url("img/invernadero.jpg") center/cover no-repeat;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-align:center;
+    padding:0 10%;
+}
+.hero img{
+    width:300px;
+    max-width:90%;
+    object-fit:contain;
+    margin-bottom:20px;
+}
+.hero p{
+    font-size:26px;
+    font-weight:700;
+    max-width:900px;
+}
+
+/* SECCIONES */
+section{padding:90px 10%;}
+h2{
+    text-align:center;
+    font-size:46px;
+    color:white;
+    margin-bottom:40px;
+}
+#nosotros{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.4)),url("img/fondo-nosotros.jpg") center/cover;}
+#proyectos{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.4)),url("img/fondo-proyectos.jpg") center/cover;}
+#servicios{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.4)),url("img/fondo-servicios.jpg") center/cover;}
+
+/* CARDS */
+.card{
+    background:rgba(255,255,255,.96);
+    padding:38px;
+    border-radius:16px;
+    width:88%;
+    margin:35px auto;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    border-left:14px solid #1768ff;
+}
+.card h3{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+.card p{
+    font-size:18px;
+    line-height:1.75;
+}
+.proyecto-title{
+    background:#1768ff;
+    color:white;
+    display:inline-block;
+    padding:6px 16px;
+    border-radius:8px;
+}
+.proyecto-img{
+    width:100%;
+    max-width:720px;
+    border-radius:14px;
+    margin-top:28px;
+}
+
+/* BOTÓN */
+.btn-cotizar{
+    display:inline-block;
+    margin-top:24px;
+    padding:16px 32px;
+    background:linear-gradient(90deg,#1768ff,#00c6ff);
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+    border-radius:12px;
+}
+
+/* WHATS */
+.whatsapp{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#25D366;
+    padding:18px;
+    border-radius:50%;
+    z-index:3000;
+}
+.whatsapp img{width:42px;}
+
+/* MODAL */
+#modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    z-index:5000;
+}
+.modal-content{
+    background:white;
+    width:90%;
+    max-width:480px;
+    margin:6% auto;
+    padding:35px;
+    border-radius:16px;
+    position:relative;
+}
+.close{
+    position:absolute;
+    top:12px;
+    right:16px;
+    font-size:28px;
+    cursor:pointer;
+}
+.modal-content input,
+.modal-content textarea{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+.modal-content button{
+    width:100%;
+    padding:16px;
+    background:#25D366;
+    color:white;
+    font-size:18px;
+    font-weight:700;
+    border:none;
+    border-radius:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    nav ul{
+        display:none;
+        position:absolute;
+        top:95px;
+        width:100%;
+        background:linear-gradient(90deg,#1b5e20,#fdd835);
+        flex-direction:column;
+        gap:22px;
+        padding:25px 0;
+    }
+    nav ul.active{
+        background: #1768ff;  /* Azul sólido cuando está abierto */
+}
+    nav ul.active{display:flex;}
+    .menu-toggle{display:block;}
+}
+/* ===== PASTO REALISTA CON FLORES ===== */
+.pasto-menu{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:0px;
+
+    /* Base verde */
+    background:
+        linear-gradient(to top, #1b5e20 0%, #2e7d32 60%, transparent 100%),
+
+        /* Hojas delgadas */
+        repeating-linear-gradient(
+            -75deg,
+            rgba(255,255,255,0.12) 0px,
+            rgba(255,255,255,0.12) 1px,
+            transparent 2px,
+            transparent 6px
+        ),
+
+        /* Hojas más gruesas */
+        repeating-linear-gradient(
+            80deg,
+            rgba(0,0,0,0.15) 0px,
+            rgba(0,0,0,0.15) 1.5px,
+            transparent 2px,
+            transparent 8px
+        ),
+
+        /* 🌼 Flores blancas */
+        radial-gradient(circle at 12% 70%, #fff 4px, transparent 6px),
+        radial-gradient(circle at 42% 60%, #fff 3px, transparent 5px),
+        radial-gradient(circle at 78% 65%, #fff 4px, transparent 6px),
+
+        /* 🌸 Flores rosas */
+        radial-gradient(circle at 25% 75%, #f48fb1 3px, transparent 5px),
+        radial-gradient(circle at 60% 70%, #f06292 4px, transparent 6px),
+
+        /* 🌻 Flores amarillas */
+        radial-gradient(circle at 90% 68%, #fdd835 4px, transparent 6px);
+
+    background-repeat:repeat-x;
+    background-size:
+        100% 100%,
+        14px 100%,
+        22px 100%,
+        120px 80px,
+        140px 90px,
+        160px 80px,
+        130px 90px,
+        170px 90px,
+        180px 90px;
+
+    transition:height .2s ease-out;
+    pointer-events:none;
+    z-index:-1;
+}
+.hero-logo{
+    transition: transform 0.15s ease-out;
+    will-change: transform;
+    pointer-events: none;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<nav id="navbar">
+<div class="logo-box"><img src="img/logo.png"></div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<div class="pasto-menu"></div>
+<ul>
+<li><a href="#inicio" onclick="toggleMenu()">Inicio</a></li>
+<li><a href="#servicios" onclick="toggleMenu()">Servicios</a></li>
+<li><a href="#proyectos" onclick="toggleMenu()">Proyectos</a></li>
+<li><a href="#nosotros" onclick="toggleMenu()">Nosotros</a></li>
+</ul>
+</nav>
+
+<section class="hero" id="inicio">
+<img src="img/logo.png" class="hero-logo">
+<p>Desarrollo e innovación en biotecnología.</p>
+</section>
+
+<section id="servicios">
+<h2>Servicios</h2>
+
+<div class="card">
+<h3>🌱 <strong>Desarrollo de especies agrícolas avanzadas</strong></h3>
+<p>
+Investigación, desarrollo y optimización de especies agrícolas mediante metodologías modernas
+que permiten mejorar rendimiento, uniformidad, estabilidad y adaptación a distintos entornos
+productivos.
+</p>
+</div>
+
+<div class="card">
+<h3>🤖 <strong>Sistemas de automatización agrícola</strong></h3>
+<p>
+Diseño e implementación de soluciones de automatización enfocadas en mejorar la eficiencia,
+reducir la intervención manual y mantener condiciones de operación estables, facilitando la
+gestión y el crecimiento ordenado de los sistemas productivos.
+</p>
+</div>
+
+<div class="card">
+<h3>🌿 <strong>Optimización de invernaderos</strong></h3>
+<p>
+Análisis técnico y mejora integral de invernaderos mediante estrategias de control, distribución
+de recursos y diseño operativo, orientadas a maximizar productividad y reducir costos.
+</p>
+</div>
+
+<div class="card">
+<h3>📊 <strong>Consultoría técnica especializada</strong></h3>
+<p>
+Asesoría profesional para la planeación, evaluación y escalamiento de proyectos agrícolas y
+biotecnológicos, respaldada por experiencia técnica y enfoque estratégico.
+</p>
+</div>
+
+<div class="card">
+<h3>🧪 <strong>Venta e implementación de biorreactores</strong></h3>
+<p>
+Ofrecemos un servicio integral de diseño, fabricación e implementación de biorreactores para
+producción vegetal, enfocado en garantizar estabilidad operativa y procesos productivos
+confiables.
+<br><br>
+El servicio incluye la puesta en marcha del sistema, acompañamiento técnico inicial,
+capacitación operativa y asesoría para su correcta integración dentro del proceso productivo.
+Nuestros biorreactores están diseñados para operar de forma continua, facilitando una
+producción homogénea, eficiente y escalable.
+<br><br>
+Esta solución está orientada a productores, laboratorios y proyectos de desarrollo que buscan
+una herramienta profesional, robusta y pensada para sostener procesos de alto nivel.
+</p>
+<a class="btn-cotizar" onclick="openModal()">Cotiza tu biorreactor</a>
+</div>
+</section>
+
+
+
+<section id="proyectos">
+<h2>Proyectos</h2>
+
+<div class="card">
+<h3 class="proyecto-title">Producción y Venta de Plantas</h3>
+<p>
+Desarrollamos proyectos completos para la producción profesional de plantas bajo condiciones
+controladas, garantizando uniformidad, sanidad y un crecimiento óptimo durante todo el ciclo
+productivo.
+<br><br>
+Nuestros sistemas están diseñados para maximizar el rendimiento, reducir pérdidas y asegurar
+una calidad constante, permitiendo a los productores operar de forma eficiente y competitiva.
+</p>
+<img src="img/invernadero2.jpg" class="proyecto-img">
+</div>
+
+<div class="card">
+<h3 class="proyecto-title">Biorreactores para Producción Vegetal</h3>
+<p>
+Diseñamos y desarrollamos biorreactores especializados orientados a la producción vegetal de
+nivel profesional. Estos sistemas permiten trabajar bajo condiciones estables y controladas,
+favoreciendo procesos repetibles, eficientes y escalables.
+<br><br>
+Cada biorreactor es concebido como una solución robusta y adaptable, pensada para proyectos
+que requieren precisión operativa, continuidad productiva y una ventaja tecnológica clara
+dentro del sector agroindustrial.
+</p>
+<img src="img/biorreactor.jpg" class="proyecto-img">
+</div>
+</section>
+<section id="nosotros">
+<h2>Nosotros</h2>
+<div class="card">
+<p>
+En <strong>3 Marías Agrotecnología</strong> desarrollamos soluciones integrales que combinan
+biotecnología, automatización y conocimiento técnico especializado. Nuestro enfoque está
+orientado a transformar procesos agrícolas tradicionales en sistemas modernos, eficientes
+y altamente controlados.
+<br><br>
+Trabajamos con visión a largo plazo, priorizando la estabilidad operativa, la optimización de
+recursos y la escalabilidad de cada proyecto. Nos enfocamos en generar resultados medibles
+que aporten valor real y sostenible a los procesos productivos de nuestros clientes.
+</p>
+</div>
+</section>
+<div id="modal" onclick="closeModal(event)">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<input id="nombre" placeholder="Nombre">
+<input id="correo" placeholder="Correo">
+<input id="telefono" placeholder="Teléfono">
+<textarea id="descripcion" placeholder="Describe tu proyecto"></textarea>
+<button onclick="enviarWhats()">Enviar a WhatsApp</button>
+</div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/523335593346" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+</a>
+
+<script>
+function toggleMenu(){
+    document.querySelector("nav ul").classList.toggle("active");
+}
+function openModal(){
+    document.getElementById("modal").style.display="block";
+}
+function closeModal(e){
+    if(!e || e.target.id==="modal"){
+        document.getElementById("modal").style.display="none";
+    }
+}
+function enviarWhats(){
+    let msg=`Cotización Biorreactor
+Nombre: ${nombre.value}
+Correo: ${correo.value}
+Teléfono: ${telefono.value}
+Proyecto: ${descripcion.value}`;
+    window.open("https://wa.me/523335593346?text="+encodeURIComponent(msg),"_blank");
+}
+
+const alturaMax = 55;
+const alturaBase = alturaMax * 0.25; // 25% inicial
+window.addEventListener("load", () => {
+    actualizarPasto();
+});
+
+
+function actualizarPasto() {
+    const pasto = document.querySelector(".pasto-menu");
+    const nav = document.getElementById("navbar");
+
+    // Ajustar altura del pasto
+    let altura = Math.min(alturaBase + window.scrollY / 5, alturaMax);
+    pasto.style.height = altura + "px";
+
+    // Hacer más pequeña la barra de navegación al hacer scroll
+    if (window.scrollY > 50) {  // puedes ajustar este valor
+        nav.classList.add("nav-small");
+    } else {
+        nav.classList.remove("nav-small");
+    }s
+}
+
+window.addEventListener("scroll", actualizarPasto);
+
+
+const heroLogo = document.querySelector("#inicio .hero-logo");
+const heroSection = document.querySelector("#inicio");
+
+if (heroLogo && window.innerWidth > 768) {
+
+    heroSection.addEventListener("mousemove", (e) => {
+        const rect = heroSection.getBoundingClientRect();
+
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        heroLogo.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
+    });
+
+
+    heroSection.addEventListener("mouseleave", () => {
+        heroLogo.style.transform = "translate(0,0)";
+    });
+}
+
+</script>
+
+</body>
+</html>
